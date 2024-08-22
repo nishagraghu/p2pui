@@ -4,7 +4,7 @@
 =========================================================
 
 * Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
+
 
 Coded by www.creative-tim.com
 
@@ -56,6 +56,14 @@ const routes = [
     icon: <Icon fontSize="small">dashboard</Icon>,
     route: "/dashboard",
     component: <Dashboard />,
+  },
+  {
+    type: "collapse",
+    name: "User List",
+    key: "user-list",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    route: "/user-list",
+    component: <Tables />,
   },
   {
     type: "collapse",

@@ -4,7 +4,7 @@
 =========================================================
 
 * Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
+
 
 Coded by www.creative-tim.com
 
@@ -34,10 +34,10 @@ import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
 // Dashboard components
 import Projects from "layouts/dashboard/components/Projects";
 import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
-
+import useAuth from "../../hooks/useAuth";
 function Dashboard() {
   const { sales, tasks } = reportsLineChartData;
-
+  useAuth();
   return (
     <DashboardLayout>
       <DashboardNavbar />

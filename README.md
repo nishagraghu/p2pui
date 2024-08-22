@@ -81,7 +81,7 @@ Let us know your thoughts below. And good luck with development!
 
 Quick start options:
 
-- Download from [Creative Tim](https://www.creative-tim.com/product/material-dashboard-react?ref=readme-mdr).
+- Download from (https://www.creative-tim.com/product/material-dashboard-react?ref=readme-mdr).
 
 ## Terminal Commands
 
@@ -201,8 +201,8 @@ If you have questions or need help integrating the product please [contact us](h
 
 ## Licensing
 
-- Copyright 2023 [Creative Tim](https://www.creative-tim.com?ref=readme-mdr)
-- Creative Tim [license](https://www.creative-tim.com/license?ref=readme-mdr)
+- Copyright 2023 
+
 
 ## Useful Links
 

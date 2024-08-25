@@ -37,6 +37,7 @@ Coded by www.creative-tim.com
 
 // Material Dashboard 2 React layouts
 import Dashboard from "layouts/dashboard";
+import UserManagement from "layouts/UserManagement";
 import Tables from "layouts/tables";
 import Billing from "layouts/billing";
 import RTL from "layouts/rtl";
@@ -49,6 +50,14 @@ import SignUp from "layouts/authentication/sign-up";
 import Icon from "@mui/material/Icon";
 
 const routes = [
+  {
+    type: "collapse",
+    name: "User Management",
+    key: "user-management",
+    icon: <Icon fontSize="small">people</Icon>,
+    route: "/user-management",
+    component: <UserManagement />,
+  },
   {
     type: "collapse",
     name: "Dashboard",

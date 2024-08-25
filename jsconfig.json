@@ -8,7 +8,7 @@
       "styles/*": ["styles/*"],
       "utils/*": ["utils/*"],
       "hooks/*": ["hooks/*"],
-      "redux-stor/*": ["redux/*"],
+      "redux-stor/*": ["redux/*"]
     }
   }
 }

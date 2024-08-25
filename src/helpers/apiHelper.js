@@ -54,7 +54,7 @@ const apiHelper = {
     try {
       const response = await apiClient({
         method: method,
-        url: url,
+        url: `${baseURL}${url}`,
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

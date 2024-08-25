@@ -17,12 +17,14 @@ Coded by www.creative-tim.com
 
 // @mui material components
 import Icon from "@mui/material/Icon";
-
+import { useState, useEffect } from "react";
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDAvatar from "components/MDAvatar";
 import MDProgress from "components/MDProgress";
+import MDButton from "components/MDButton";
+import apiHelper from "helpers/apiHelper";
 
 // Images
 import LogoAsana from "assets/images/small-logos/logo-asana.svg";
@@ -31,8 +33,36 @@ import logoAtlassian from "assets/images/small-logos/logo-atlassian.svg";
 import logoSlack from "assets/images/small-logos/logo-slack.svg";
 import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
 import logoInvesion from "assets/images/small-logos/logo-invision.svg";
+import Header from "layouts/profile/components/Header";
 
 export default function data() {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await apiHelper.getProtected("private/users");
+      setData(result.content?.users);
+      // dispatchRedux(setUser(result.content?.user));
+    };
+    fetchData();
+  }, []);
+  const formatData = (info = []) => {
+    return info?.map((item) => {
+      return {
+        name: `${item.firstName} ${item.lastName}`,
+        email: item.email,
+        phone: "123-456-7890",
+        role: item.role,
+        status: item.status,
+        action: (
+          <MDTypography component="a" href="#" color="text">
+            <Icon style={{ cursor: "pointer", marginRight: "12px" }}>edit</Icon>
+            <Icon>visibility</Icon>
+          </MDTypography>
+        ),
+      };
+    });
+  };
+
   const Project = ({ image, name }) => (
     <MDBox display="flex" alignItems="center" lineHeight={1}>
       <MDAvatar src={image} name={name} size="sm" variant="rounded" />
@@ -55,128 +85,41 @@ export default function data() {
 
   return {
     columns: [
-      { Header: "project", accessor: "project", width: "30%", align: "left" },
-      { Header: "budget", accessor: "budget", align: "left" },
+      { Header: "User Name", accessor: "name", width: "20%", align: "left" },
+      { Header: "Email", accessor: "email", align: "left" },
+      { Header: "Phone", accessor: "phone", align: "center" },
+      { Header: "role", accessor: "role", align: "center" },
       { Header: "status", accessor: "status", align: "center" },
-      { Header: "completion", accessor: "completion", align: "center" },
       { Header: "action", accessor: "action", align: "center" },
     ],
 
-    rows: [
-      {
-        project: <Project image={LogoAsana} name="Asana" />,
-        budget: (
-          <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-            $2,500
-          </MDTypography>
-        ),
-        status: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            working
-          </MDTypography>
-        ),
-        completion: <Progress color="info" value={60} />,
-        action: (
-          <MDTypography component="a" href="#" color="text">
-            <Icon>more_vert</Icon>
-          </MDTypography>
-        ),
-      },
-      {
-        project: <Project image={logoGithub} name="Github" />,
-        budget: (
-          <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-            $5,000
-          </MDTypography>
-        ),
-        status: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            done
-          </MDTypography>
-        ),
-        completion: <Progress color="success" value={100} />,
-        action: (
-          <MDTypography component="a" href="#" color="text">
-            <Icon>more_vert</Icon>
-          </MDTypography>
-        ),
-      },
-      {
-        project: <Project image={logoAtlassian} name="Atlassian" />,
-        budget: (
-          <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-            $3,400
-          </MDTypography>
-        ),
-        status: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            canceled
-          </MDTypography>
-        ),
-        completion: <Progress color="error" value={30} />,
-        action: (
-          <MDTypography component="a" href="#" color="text">
-            <Icon>more_vert</Icon>
-          </MDTypography>
-        ),
-      },
-      {
-        project: <Project image={logoSpotify} name="Spotify" />,
-        budget: (
-          <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-            $14,000
-          </MDTypography>
-        ),
-        status: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            working
-          </MDTypography>
-        ),
-        completion: <Progress color="info" value={80} />,
-        action: (
-          <MDTypography component="a" href="#" color="text">
-            <Icon>more_vert</Icon>
-          </MDTypography>
-        ),
-      },
-      {
-        project: <Project image={logoSlack} name="Slack" />,
-        budget: (
-          <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-            $1,000
-          </MDTypography>
-        ),
-        status: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            canceled
-          </MDTypography>
-        ),
-        completion: <Progress color="error" value={0} />,
-        action: (
-          <MDTypography component="a" href="#" color="text">
-            <Icon>more_vert</Icon>
-          </MDTypography>
-        ),
-      },
-      {
-        project: <Project image={logoInvesion} name="Invesion" />,
-        budget: (
-          <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
-            $2,300
-          </MDTypography>
-        ),
-        status: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            done
-          </MDTypography>
-        ),
-        completion: <Progress color="success" value={100} />,
-        action: (
-          <MDTypography component="a" href="#" color="text">
-            <Icon>more_vert</Icon>
-          </MDTypography>
-        ),
-      },
-    ],
+    // rows: [
+    //   {
+    //     project: <Project image={LogoAsana} name="Asana" />,
+    //     budget: (
+    //       <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
+    //         $2,500
+    //       </MDTypography>
+    //     ),
+    //     phone: (
+    //       <MDTypography component="a" href="#" variant="button" color="text" fontWeight="medium">
+    //         123-456-7890
+    //       </MDTypography>
+    //     ),
+    //     status: (
+    //       <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+    //         working
+    //       </MDTypography>
+    //     ),
+    //     completion: <Progress color="info" value={60} />,
+    //     action: (
+    //       <MDTypography component="a" href="#" color="text">
+    //         <Icon style={{ cursor: "pointer", marginRight: "12px" }}>edit</Icon>
+    //         <Icon>visibility</Icon>
+    //       </MDTypography>
+    //     ),
+    //   },
+    // ],
+    rows: formatData(data),
   };
 }

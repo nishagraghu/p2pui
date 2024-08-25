@@ -18,6 +18,8 @@ import Grid from "@mui/material/Grid";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
+import GaugeChart from "react-gauge-chart";
+import Card from "@mui/material/Card";
 
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -35,6 +37,50 @@ import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
 import Projects from "layouts/dashboard/components/Projects";
 import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
 import useAuth from "../../hooks/useAuth";
+import { Line } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+
+const LineChart = () => {
+  const data = {
+    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    datasets: [
+      {
+        label: "My First Dataset",
+        data: [65, 59, 80, 81, 56, 55, 40],
+        fill: false,
+        borderColor: "rgb(75, 192, 192)",
+        tension: 0.1,
+      },
+    ],
+  };
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "Sample Line Chart",
+      },
+    },
+  };
+
+  return <Line data={data} options={options} />;
+};
+
 function Dashboard() {
   const { sales, tasks } = reportsLineChartData;
   useAuth();
@@ -129,6 +175,43 @@ function Dashboard() {
                   date="updated 4 min ago"
                   chart={sales}
                 />
+              </MDBox>
+            </Grid>
+            <Grid item xs={12} md={6} lg={4}>
+              <MDBox mb={3}>
+                <ReportsLineChart
+                  color="dark"
+                  title="completed tasks"
+                  description="Last Campaign Performance"
+                  date="just updated"
+                  chart={tasks}
+                />
+              </MDBox>
+            </Grid>
+          </Grid>
+        </MDBox>
+        <MDBox mt={4.5}>
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={6} lg={4}>
+              <MDBox mb={3}>
+                <Card sx={{ height: "100%" }}>
+                  <MDBox padding="1rem">
+                    <GaugeChart
+                      id="gauge-chart2"
+                      nrOfLevels={20}
+                      percent={0.86}
+                      textColor="#000"
+                      formatTextValue={(value) => `${value}% kWh`}
+                    />
+                  </MDBox>
+                </Card>
+              </MDBox>
+            </Grid>
+            <Grid item xs={12} md={6} lg={4}>
+              <MDBox mb={3}>
+                <Card sx={{ height: "100%" }}>
+                  <LineChart />
+                </Card>
               </MDBox>
             </Grid>
             <Grid item xs={12} md={6} lg={4}>

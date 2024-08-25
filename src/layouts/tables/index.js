@@ -19,6 +19,7 @@ import Card from "@mui/material/Card";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
+import SoftUITabs from "components/SoftUITabs";
 import MDTypography from "components/MDTypography";
 
 // Material Dashboard 2 React example components
@@ -26,6 +27,7 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 import DataTable from "examples/Tables/DataTable";
+import AlertDialogSlide from "components/AlertDialogSlide";
 
 // Data
 import authorsTableData from "layouts/tables/data/authorsTableData";
@@ -38,6 +40,16 @@ function Tables() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
+      <SoftUITabs />
+      <AlertDialogSlide
+        buttonText="Show Alert"
+        dialogTitle="Use Google's location service?"
+        dialogContent="Let Google help apps determine location. This means sending anonymous location data to Google."
+        agreeText="Agree"
+        disagreeText="Disagree"
+        onAgree={() => console.log("Agreed")}
+        onDisagree={() => console.log("Disagreed")}
+      />
       <MDBox pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>

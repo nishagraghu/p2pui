@@ -66,9 +66,7 @@ function Configurator() {
   const dispatchRedux = useDispatch();
   useEffect(() => {
     const fetchData = async () => {
-      const result = await apiHelper.getProtected(
-        "http://localhost:3001/api/v1/private/users/info"
-      );
+      const result = await apiHelper.getProtected("private/users/info");
       setData(result);
       dispatchRedux(setUser(result.content?.user));
     };
